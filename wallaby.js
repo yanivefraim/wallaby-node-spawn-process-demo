@@ -5,7 +5,6 @@ module.exports = function (wallaby) {
     files: [
       {pattern: 'lib/launch.js', instrument: false},
       {pattern: 'lib/index.js', instrument: false},
-      {pattern: 'src/hello.js', instrument: false},
       {pattern: 'src/**'}
     ],
 
