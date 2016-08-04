@@ -1,10 +1,9 @@
 module.exports = function (wallaby) {
   process.env.NODE_PATH += `:${require('path').join(wallaby.localProjectDir, 'node_modules')}`;
-  console.log(wallaby.projectCacheDir);
+
   return {
     files: [
-      {pattern: 'lib/launch.js', instrument: false},
-      {pattern: 'lib/index.js', instrument: false},
+      {pattern: 'lib/*.js', instrument: true},
       {pattern: 'src/**/*.js'}
     ],
 
@@ -17,12 +16,7 @@ module.exports = function (wallaby) {
     },
 
     preprocessors: {
-      'lib/*.js': file => require('babel-core')
-        .transform(file.content, {sourceMap: true, filename: file.path})
-    },
-
-    setup: function () {
-      require("babel-polyfill");
+      'lib/*.js': file => '!global.$_$wp && (global.$_$wp = global.$_$wpe = global.$_$w = global.$_$wf = () => {});' + file.content
     },
 
     env: {
